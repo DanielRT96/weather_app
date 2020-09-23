@@ -10,32 +10,36 @@
   <body>
     <main>
       <div class="flex__container">
-        <input type="text" />
+        <label for="searchBox">Choose a city:</label>
+        <input type="text" name="searchBox" class="search__box" />
         <div class="flex__item firstBox">
-            <div class="flex__row">
-                <div class="city__name"></div>
-                <div class="temperature"></div>
+          <div class="flex__row">
+            <div class="city__name" style="text-transform: uppercase; font-size: 30px;">City Name</div>
+            <div class="temperature">
+              <div class="lowest__temperature">↓18°</div>
+              <div class="highest__temperature">↑25°</div>
             </div>
-            <div class="flex__row">
-                <div class="today">
-                    <div class="today__name"></div>
-                    <div class="today__date"></div>
-                    <div class="today__wind"></div>
-                    <div class="rain"></div>
-                </div>
-                <div class="current__status">
-                    <img src="" alt="">
-                    <div class="current__status__string"></div>
-                </div>
-                <div class="current__celsius"></div>
+          </div>
+          <div class="flex__row">
+            <div class="today">
+              <div class="today__name" style="text-transform: uppercase;">Monday</div>
+              <div class="today__date">00/00/2016</div>
+              <div class="today__wind">Wind 6km/h</div>
+              <div class="rain">30%</div>
             </div>
+            <div class="current__status">
+              <div class="current__img" style="font-size:150px";></div>
+              <div class="current__status__string" style="text-transform: uppercase;">Parly Cloudy</div>
+            </div>
+            <div class="current__celsius" style="font-size: 80px;">22°</div>
+          </div>
         </div>
         <div class="flex__item secondBox">
-            <div class="item__container">
-                <div class="day"></div>
-                <div class="status__img"></div>
-                <div class="celsius"></div>
-            </div>
+          <div class="item__container">
+            <div class="day"></div>
+            <div class="status__img"></div>
+            <div class="celsius"></div>
+          </div>
         </div>
       </div>
     </main>

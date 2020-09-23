@@ -2,29 +2,59 @@
   box-sizing: border-box;
 }
 
-main {
-  width: auto;
-  height: auto;
-}
-
 .flex__container {
   display: flex;
   flex-direction: column;
   border: 1px solid black;
-  padding: 10px 20px;
   align-items: center;
-  background-image: linear-gradient(#01738d, #38c3bc);
+  background-image: linear-gradient(#007891, #38c3bc);
+  font-family: Tahoma, Geneva, sans-serif;
 }
 
 .flex__item {
-  border: 1px solid red;
-  border-radius: 30px;
-  height: 100px;
-  width: 100px;
+  border-radius: 20px;
+  border: 0;
   margin: 10px;
   color: #ffffff;
 }
 
 .flex__item.firstBox {
-  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 60%;
+  border: 1px solid #38a3b6;
+  background-image: linear-gradient(to bottom right, #489fb2, #39c4bd);
+}
+.flex__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+  align-items: flex-start;
+}
+
+.temperature {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 70px;
+}
+
+.today {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  opacity: 70%;
+}
+
+.current__status {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.current__celsius {
+  border: 1px solid black;
 }

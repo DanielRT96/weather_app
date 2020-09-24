@@ -10,6 +10,7 @@ main {
   display: flex;
   justify-content: center;
 }
+
 .flex__container {
   display: flex;
   flex-direction: column;
@@ -95,4 +96,51 @@ main {
   outline-color: #d2d3d4;
   box-shadow: 0px 0px 0px 1px #2d3d4d;
   outline: none;
+}
+
+.city__name {
+  text-transform: uppercase;
+  font-size: 30px;
+}
+
+.today__name {
+  text-transform: uppercase;
+  font-size: 20px;
+  opacity: 80%;
+}
+
+.today__date {
+  font-size: 15px;
+  opacity: 70%;
+}
+
+.today__wind {
+  font-size: 14px;
+  opacity: 60%;
+}
+
+.rain {
+  font-size: 20px;
+  opacity: 50%;
+}
+
+.current__status img {
+  margin-top: -50px;
+}
+
+.current__status__string {
+  text-transform: uppercase;
+  font-size: 30px;
+  opacity: 70%;
+  margin-top: -20px;
+}
+
+.current__celsius {
+  font-size: 100px;
+  margin-top: 20px;
+}
+
+.search__label {
+  color: #ffffff;
+  margin-bottom: 5px;
 }

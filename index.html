@@ -5,23 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
 
-    <title>Weather App </title>
+    <title>Weather App</title>
   </head>
   <body>
     <main>
       <div class="flex__container">
-        <label for="searchBox" style="color: #ffffff; margin-bottom: 5px"
-          >Choose a city:</label
-        >
+        <label for="searchBox" class="search__label">Choose a city:</label>
         <input type="text" name="searchBox" class="search__box" />
         <div class="flex__item firstBox">
           <div class="flex__row">
-            <div
-              class="city__name"
-              style="text-transform: uppercase; font-size: 30px"
-            >
-              City Name
-            </div>
+            <div class="city__name">City Name</div>
             <div class="temperature">
               <div class="lowest__temperature">↓18°</div>
               <div class="highest__temperature">↑25°</div>
@@ -29,46 +22,19 @@
           </div>
           <div class="flex__row">
             <div class="today">
-              <div
-                class="today__name"
-                style="text-transform: uppercase; font-size: 20px; opacity: 80%"
-              >
-                Monday
-              </div>
-              <div class="today__date" style="font-size: 15px; opacity: 70%">
-                00/00/2016
-              </div>
-              <div class="today__wind" style="font-size: 14px; opacity: 60%">
-                Wind 6km/h
-              </div>
-              <div class="rain" style="font-size: 20px; opacity: 50%">
-                💧30%
-              </div>
+              <div class="today__name">Monday</div>
+              <div class="today__date">00/00/2016</div>
+              <div class="today__wind">Wind 6km/h</div>
+              <div class="rain">💧30%</div>
             </div>
             <div class="current__status">
               <img
                 src="./dist/icons/solid-black/png/256x256/cloudy.png"
                 alt=""
-                style="margin-top: -50px"
               />
-              <div
-                class="current__status__string"
-                style="
-                  text-transform: uppercase;
-                  font-size: 30px;
-                  opacity: 70%;
-                  margin-top: -20px;
-                "
-              >
-                Partly Cloudy
-              </div>
+              <div class="current__status__string">Partly Cloudy</div>
             </div>
-            <div
-              class="current__celsius"
-              style="font-size: 100px; margin-top: 20px"
-            >
-              22°
-            </div>
+            <div class="current__celsius">22°</div>
           </div>
         </div>
         <div class="flex__item secondBox">

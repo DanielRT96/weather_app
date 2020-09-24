@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
 
-    <title>Document</title>
+    <title>Weather App </title>
   </head>
   <body>
     <main>
       <div class="flex__container">
-        <label for="searchBox" style="color: #ffffff; margin-bottom: 5px;">Choose a city:</label>
+        <label for="searchBox" style="color: #ffffff; margin-bottom: 5px"
+          >Choose a city:</label
+        >
         <input type="text" name="searchBox" class="search__box" />
         <div class="flex__item firstBox">
           <div class="flex__row">
@@ -46,13 +48,19 @@
             <div class="current__status">
               <img
                 src="./dist/icons/solid-black/png/256x256/cloudy.png"
-                alt="" style= "margin-top: -50px"
+                alt=""
+                style="margin-top: -50px"
               />
               <div
                 class="current__status__string"
-                style="text-transform: uppercase; font-size: 30px; opacity: 70%; margin-top: -20px;"
+                style="
+                  text-transform: uppercase;
+                  font-size: 30px;
+                  opacity: 70%;
+                  margin-top: -20px;
+                "
               >
-                Parly Cloudy
+                Partly Cloudy
               </div>
             </div>
             <div
@@ -71,9 +79,7 @@
           </div>
           <div class="item__container">
             <div class="day">WED</div>
-            <div class="">
-              <img src="./dist/icons/solid-black/png/32x32/cloudy.png" alt="" />
-            </div>
+            <img src="./dist/icons/solid-black/png/32x32/cloudy.png" alt="" />
             <div class="celsius">20°</div>
           </div>
           <div class="item__container">
@@ -101,4 +107,5 @@
     </main>
   </body>
   <script src="main.js"></script>
+  <script type="text/javascript" src="data.json"></script>
 </html>

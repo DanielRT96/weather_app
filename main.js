@@ -8,7 +8,7 @@ const highestTemp = document.querySelector(".highest__temperature");
 const todayName = document.querySelector(".today__name");
 const todayDate = document.querySelector(".today__date");
 const todayWind = document.querySelector(".today__wind");
-const rainChance = document.querySelector(".rain");
+const rain = document.querySelector(".rain");
 const currentStatusStr = document.querySelector(".current__status__string");
 const currentCelsius = document.querySelector(".current__celsius");
 const day = document.querySelector(".day");
@@ -28,20 +28,31 @@ async function callAPI(apiURL) {
 //Budapest
 const baseWeather = async () => {
   const data = await callAPI(weatherApi);
-
+  //CityName
   cityName.innerHTML = data.city.name;
 
+  //Dates
   let date_string = data.list[0].dt_txt;
   let dateApi = new Date(date_string);
   todayName.innerHTML = getTodayString(dateApi.getDay());
   todayDate.innerHTML = dateApi.toLocaleDateString("en-US");
 
+  //Wind
   let windSpeed = Math.round(data.list[0].wind.speed);
   todayWind.innerHTML = `Wind ${windSpeed}km/h`;
 
-  //let chanceRain = data.list[0].rain.3h * 100;
-  //lowestTemp.innerHTML = celsiusCalc(data.list[0].main.temp_min);
-  //highestTemp.innerHTML = celsiusCalc(data.list[0].main.temp_max);
+  //Chance of Rain
+  const string = "3h";
+  let rainVolume = data.list[1].rain[string];
+  rain.innerHTML = `💧${rainVolume}mm`;
+
+  //Temperature
+  currentCelsius.innerHTML = `${celsiusCalc(data.list[0].main.temp)}°`;
+  lowestTemp.innerHTML = `↓${celsiusCalc(data.list[0].main.temp_min)}°`;
+  highestTemp.innerHTML = `↑${celsiusCalc(data.list[0].main.temp_max)}°`;
+
+  //Current weather
+  currentStatusStr.innerHTML = data.list[0].weather[0].description;
   console.log(data);
 };
 
@@ -60,19 +71,10 @@ const getTodayString = (todayNumber) => {
   return todayString;
 };
 
-const celsiusCalc = (fahrenheit) => {
-  let fTemp = fahrenheit;
-  let fToC = Math.round((fTemp - 32) / 1.8);
-  console.log(fToC);
-  return fToC;
+const celsiusCalc = (kelvin) => {
+  let kTemp = kelvin;
+  let kToC = Math.round(kTemp - 273.15);
+  return kToC;
 };
 
 baseWeather();
-
-
-const updateUi = () => {
-
-}
-
-let d = new Date();
-console.log(d);

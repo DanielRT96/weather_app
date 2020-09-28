@@ -1,6 +1,3 @@
-const weatherApi =
-  "https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=Budapest&appid=2e0f37fe8a0d411129e27f36b2a7a02f";
-
 //DOMs strings
 const cityName = document.querySelector(".city__name");
 const lowestTemp = document.querySelector(".lowest__temperature");
@@ -14,8 +11,11 @@ const currentCelsius = document.querySelector(".current__celsius");
 const day = document.querySelector(".day");
 const celsius = document.querySelector(".celsius");
 const cStatus = document.querySelector(".current__status");
+const inputBox = document.querySelector(".search__box");
 
-// // // API Call
+//API key
+
+// API Call
 async function callAPI(apiURL) {
   try {
     const result = await fetch(apiURL);
@@ -26,8 +26,9 @@ async function callAPI(apiURL) {
   }
 }
 
-//On Open - Budapest
-const baseWeather = async () => {
+// On Open - Budapest
+const baseWeather = async (input) => {
+  const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
   //APi call
   const data = await callAPI(weatherApi);
 
@@ -56,6 +57,7 @@ const baseWeather = async () => {
   //Current weather
   let weatherDesc = data.list[0].weather[0].main;
   currentStatusStr.innerHTML = data.list[0].weather[0].description;
+  clearElement(".current__weather__picture");
   getIcon(cStatus, weatherDesc);
 
   console.log(data);
@@ -116,8 +118,21 @@ const getIcon = (parent, weatherDescription) => {
   parent.insertAdjacentHTML("afterbegin", weatherIcon);
 };
 
-baseWeather();
+const clearElement = (classOfEl) => {
+  const element = document.querySelector(classOfEl);
+  if (element) element.parentElement.removeChild(element);
+};
 
 // fetch("./data.json")
 //   .then((response) => response.json())
 //   .then((data) => console.log(data));
+inputBox.addEventListener("keypress", (e) => {
+  let input;
+  if (e.key === "Enter") {
+    input = inputBox.value;
+    baseWeather(input);
+    inputBox.value = "";
+  }
+});
+
+baseWeather("Budapest");

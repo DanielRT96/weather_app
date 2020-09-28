@@ -8,12 +8,10 @@ const todayWind = document.querySelector(".today__wind");
 const rain = document.querySelector(".rain");
 const currentStatusStr = document.querySelector(".current__status__string");
 const currentCelsius = document.querySelector(".current__celsius");
-const day = document.querySelector(".day");
+//const day = document.querySelector(".day");
 const celsius = document.querySelector(".celsius");
 const cStatus = document.querySelector(".current__status");
 const inputBox = document.querySelector(".search__box");
-
-//API key
 
 // API Call
 async function callAPI(apiURL) {
@@ -28,7 +26,9 @@ async function callAPI(apiURL) {
 
 // On Open - Budapest
 const baseWeather = async (input) => {
+  // API key
   const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
+
   //APi call
   const data = await callAPI(weatherApi);
 
@@ -60,6 +60,16 @@ const baseWeather = async (input) => {
   clearElement(".current__weather__picture");
   getIcon(cStatus, weatherDesc);
 
+  // Set up second flexbox
+  // for (let i = 0; i < 4; i++) {
+  //   for (let j = 3; j < 12; j+=8) {
+  //     let day = document.querySelector(`.day${[i]}`);
+  //     let day_string = data.list[j].dt_txt;
+  //     console.log(day_string)
+  //     let dayNum = new Date(day_string);
+  //     day.innerHTML = getTodayString(dayNum.getDay()).substring(0,3).toUpperCase();
+  //   }
+  // }
   console.log(data);
 };
 
@@ -123,9 +133,10 @@ const clearElement = (classOfEl) => {
   if (element) element.parentElement.removeChild(element);
 };
 
-// fetch("./data.json")
-//   .then((response) => response.json())
-//   .then((data) => console.log(data));
+fetch("./data.json")
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+
 inputBox.addEventListener("keypress", (e) => {
   let input;
   if (e.key === "Enter") {
@@ -136,3 +147,5 @@ inputBox.addEventListener("keypress", (e) => {
 });
 
 baseWeather("Budapest");
+
+

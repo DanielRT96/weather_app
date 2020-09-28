@@ -13,6 +13,7 @@ const currentStatusStr = document.querySelector(".current__status__string");
 const currentCelsius = document.querySelector(".current__celsius");
 const day = document.querySelector(".day");
 const celsius = document.querySelector(".celsius");
+const cStatus = document.querySelector(".current__status");
 
 // // // API Call
 async function callAPI(apiURL) {
@@ -25,9 +26,11 @@ async function callAPI(apiURL) {
   }
 }
 
-//Budapest
+//On Open - Budapest
 const baseWeather = async () => {
+  //APi call
   const data = await callAPI(weatherApi);
+
   //CityName
   cityName.innerHTML = data.city.name;
 
@@ -41,10 +44,9 @@ const baseWeather = async () => {
   let windSpeed = Math.round(data.list[0].wind.speed);
   todayWind.innerHTML = `Wind ${windSpeed}km/h`;
 
-  //Chance of Rain
-  const string = "3h";
-  let rainVolume = data.list[1].rain[string];
-  rain.innerHTML = `💧${rainVolume}mm`;
+  //Humidity
+  let rainVolume = data.list[0].main.humidity;
+  rain.innerHTML = `💧${rainVolume}%`;
 
   //Temperature
   currentCelsius.innerHTML = `${celsiusCalc(data.list[0].main.temp)}°`;
@@ -52,7 +54,10 @@ const baseWeather = async () => {
   highestTemp.innerHTML = `↑${celsiusCalc(data.list[0].main.temp_max)}°`;
 
   //Current weather
+  let weatherDesc = data.list[0].weather[0].main;
   currentStatusStr.innerHTML = data.list[0].weather[0].description;
+  getIcon(cStatus, weatherDesc);
+
   console.log(data);
 };
 
@@ -77,4 +82,42 @@ const celsiusCalc = (kelvin) => {
   return kToC;
 };
 
+const getIcon = (parent, weatherDescription) => {
+  let weatherText;
+  switch (weatherDescription) {
+    case "Clear":
+      weatherText = "clear";
+      break;
+    case "Clouds":
+      weatherText = "cloudy";
+      break;
+    case "Rain":
+      weatherText = "rain";
+      break;
+    case "Thunderstorm":
+      weatherText = "tstorms";
+      break;
+    case "Drizzle":
+      weatherText = "flurries";
+      break;
+    case "Snow":
+      weatherText = "snow";
+      break;
+    default:
+      weatherText = "clear";
+  }
+
+  const weatherIcon = `
+    <img
+        src="./dist/icons/solid-white/png/256x256/${weatherText}.png"
+        alt="" class="current__weather__picture"
+    />
+  `;
+  parent.insertAdjacentHTML("afterbegin", weatherIcon);
+};
+
 baseWeather();
+
+// fetch("./data.json")
+//   .then((response) => response.json())
+//   .then((data) => console.log(data));

@@ -9,13 +9,13 @@ main {
   height: 100%;
   display: flex;
   justify-content: center;
+  background-image: linear-gradient(#007891, #38c3bc);
 }
 
 .flex__container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: linear-gradient(#007891, #38c3bc);
   font-family: Tahoma, Geneva, sans-serif;
   width: 50vw;
   padding: 20px;
@@ -110,17 +110,17 @@ main {
 }
 
 .today__date {
-  font-size: 17.5px;
+  font-size: 17px;
   opacity: 70%;
 }
 
 .today__wind {
-  font-size: 15px;
+  font-size: 14px;
   opacity: 60%;
 }
 
 .rain {
-  font-size: 17px;
+  font-size: 15.5px;
   opacity: 50%;
 }
 

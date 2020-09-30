@@ -8,15 +8,20 @@ const todayWind = document.querySelector(".today__wind");
 const rain = document.querySelector(".rain");
 const currentStatusStr = document.querySelector(".current__status__string");
 const currentCelsius = document.querySelector(".current__celsius");
-//const day = document.querySelector(".day");
-const celsius = document.querySelector(".celsius");
+const days = document.querySelectorAll(".day");
+const celsiuses = document.querySelectorAll(".celsius");
 const cStatus = document.querySelector(".current__status");
 const inputBox = document.querySelector(".search__box");
 
 // API Call
 async function callAPI(apiURL) {
   try {
-    const result = await fetch(apiURL);
+    const result = await fetch(apiURL, {
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
     const data = await result.json();
     return data;
   } catch (error) {
@@ -60,16 +65,38 @@ const baseWeather = async (input) => {
   clearElement(".current__weather__picture");
   getIcon(cStatus, weatherDesc);
 
-  // Set up second flexbox
-  // for (let i = 0; i < 4; i++) {
-  //   for (let j = 3; j < 12; j+=8) {
-  //     let day = document.querySelector(`.day${[i]}`);
-  //     let day_string = data.list[j].dt_txt;
-  //     console.log(day_string)
-  //     let dayNum = new Date(day_string);
-  //     day.innerHTML = getTodayString(dayNum.getDay()).substring(0,3).toUpperCase();
-  //   }
+  // Get next days from API
+  let datesArr = [...data.list];
+  let daysArray = datesArr.map((element) => {
+    let dates = new Date(element.dt_txt);
+    let dateName = getTodayString(dates.getDay());
+    return dateName;
+  });
+
+  // Load days into UI
+  let filteredArr  = daysArray.filter((item, index) => daysArray.indexOf(item) === index);
+  filteredArr.shift();
+  filteredArr.map((day, index) => {
+    let dayElement = document.querySelector(`.day${index}`);
+    dayElement.innerHTML = day.substring(0, 3).toUpperCase();;
+  });
+
+  //Load celsius into UI
+  // datesArr.map(element => {
+  //   element.number.reduce((a, b) => (a + b)) / element.length
   // }
+
+  // let dataArray = datesArr.map((element) => {
+  //   let dates = new Date(element.dt_txt);
+  //   let dateName = getTodayString(dates.getDay());
+
+  //   let temperatures = element.main.temp;
+  //   let celsiuses = celsiusCalc(temperatures);
+  //   return dateName, celsiuses;
+  // });
+
+  //console.log(dataArray);
+
   console.log(data);
 };
 
@@ -133,9 +160,9 @@ const clearElement = (classOfEl) => {
   if (element) element.parentElement.removeChild(element);
 };
 
-fetch("./data.json")
-  .then((response) => response.json())
-  .then((data) => console.log(data));
+// fetch("./data.json")
+//   .then((response) => response.json())
+//   .then((data) => console.log(data));
 
 inputBox.addEventListener("keypress", (e) => {
   let input;
@@ -147,5 +174,3 @@ inputBox.addEventListener("keypress", (e) => {
 });
 
 baseWeather("Budapest");
-
-

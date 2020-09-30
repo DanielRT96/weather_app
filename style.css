@@ -17,7 +17,7 @@ main {
   flex-direction: column;
   align-items: center;
   font-family: Tahoma, Geneva, sans-serif;
-  width: 50vw;
+  width: 650px;
   padding: 20px;
   height: auto;
 }
@@ -33,7 +33,7 @@ main {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  width: 90%;
+  width: 650px;
   border: 1px solid #38a3b6;
   background-image: linear-gradient(to bottom right, #489fb2, #39c4bd);
 }
@@ -70,7 +70,7 @@ main {
   display: flex;
   flex-direction: row;
   padding: 20px;
-  width: 90%;
+  width: 650px;
   border: 1px solid #38a3b6;
   background-image: linear-gradient(to bottom right, #57bcc4, #39c4bd);
   justify-content: space-evenly;
@@ -130,7 +130,7 @@ main {
 
 .current__status__string {
   text-transform: uppercase;
-  font-size: 30px;
+  font-size: 28px;
   opacity: 70%;
   margin-top: -20px;
 }
@@ -143,4 +143,15 @@ main {
 .search__label {
   color: #ffffff;
   margin-bottom: 5px;
+}
+
+@media (max-width: 420px) {
+  .flex__container {
+    width: 420px;
+  }
+  .flex__item.firstBox,
+  .flex__item.secondBox {
+    width: 390px;
+  }
+
 }

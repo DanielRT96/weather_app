@@ -66,15 +66,19 @@ const baseWeather = async (input) => {
   getIcon(cStatus, weatherDesc);
 
   // Get next days from API
-  let datesArr = [...data.list];
-  let daysArray = datesArr.map((element) => {
+  let newDataArr = [...data.list];
+  let dataArray = newDataArr.map((element) => {
     let dates = new Date(element.dt_txt);
     let dateName = getTodayString(dates.getDay());
-    return dateName;
+
+    let temperatures = element.main.temp;
+    let celsiuses = celsiusCalc(temperatures);
+    return new Array(dateName, celsiuses);
   });
 
-  // Load days into UI
-  let filteredArr  = daysArray.filter((item, index) => daysArray.indexOf(item) === index);
+  //Load days into UI
+  let datesArr = dataArray.map(element => element[0]);
+  let filteredArr  = datesArr.filter((item, index) => datesArr.indexOf(item) === index);
   filteredArr.shift();
   filteredArr.map((day, index) => {
     let dayElement = document.querySelector(`.day${index}`);
@@ -82,22 +86,10 @@ const baseWeather = async (input) => {
   });
 
   //Load celsius into UI
-  // datesArr.map(element => {
-  //   element.number.reduce((a, b) => (a + b)) / element.length
-  // }
-
-  // let dataArray = datesArr.map((element) => {
-  //   let dates = new Date(element.dt_txt);
-  //   let dateName = getTodayString(dates.getDay());
-
-  //   let temperatures = element.main.temp;
-  //   let celsiuses = celsiusCalc(temperatures);
-  //   return dateName, celsiuses;
-  // });
-
-  //console.log(dataArray);
-
-  console.log(data);
+  let myTestArr = filteredArr.map(el => new Array(el));
+  let what = myTestArr.filter(el => !el.indexOf("Sunday"));
+  console.log(what);
+  console.log(myTestArr);
 };
 
 const getTodayString = (todayNumber) => {

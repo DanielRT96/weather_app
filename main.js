@@ -8,8 +8,6 @@ const todayWind = document.querySelector(".today__wind");
 const rain = document.querySelector(".rain");
 const currentStatusStr = document.querySelector(".current__status__string");
 const currentCelsius = document.querySelector(".current__celsius");
-const days = document.querySelectorAll(".day");
-const celsiuses = document.querySelectorAll(".celsius");
 const cStatus = document.querySelector(".current__status");
 const inputBox = document.querySelector(".search__box");
 
@@ -32,7 +30,7 @@ async function callAPI(apiURL) {
 // On Open - Budapest
 const baseWeather = async (input) => {
   // API key
-  const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
+  // const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
 
   //APi call
   const data = await callAPI(weatherApi);
@@ -77,19 +75,39 @@ const baseWeather = async (input) => {
   });
 
   //Load days into UI
-  let datesArr = dataArray.map(element => element[0]);
-  let filteredArr  = datesArr.filter((item, index) => datesArr.indexOf(item) === index);
+  let datesArr = dataArray.map((element) => element[0]);
+  let filteredArr = datesArr.filter(
+    (item, index) => datesArr.indexOf(item) === index
+  );
   filteredArr.shift();
   filteredArr.map((day, index) => {
     let dayElement = document.querySelector(`.day${index}`);
-    dayElement.innerHTML = day.substring(0, 3).toUpperCase();;
+    dayElement.innerHTML = day.substring(0, 3).toUpperCase();
   });
 
   //Load celsius into UI
-  let myTestArr = filteredArr.map(el => new Array(el));
-  let what = myTestArr.filter(el => !el.indexOf("Sunday"));
-  console.log(what);
-  console.log(myTestArr);
+  let celArray = filteredArr.map((el) => new Array(el));
+
+  filteredArr.map((el) => {
+    let total;
+    let dayIndex;
+    let numberOfLoops = 0;
+    let avg = total / numberOfLoops;
+
+    for (let i = 0; i < dataArray.length; i++) {
+      if (el === dataArray[i][0]) {
+        dayIndex = celArray.findIndex((el) => {
+          if (el.includes(dataArray[i][0])) return el;
+        });
+        total += dataArray[i][1];
+        numberOfLoops++;
+      }
+    }
+    celArray[dayIndex].push(avg);
+  });
+
+  console.log(celArray);
+  console.log(dataArray);
 };
 
 const getTodayString = (todayNumber) => {

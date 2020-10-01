@@ -147,11 +147,38 @@ main {
 
 @media (max-width: 420px) {
   .flex__container {
-    width: 420px;
+    width: 400px;
   }
   .flex__item.firstBox,
   .flex__item.secondBox {
-    width: 390px;
+    width: 400px;
+  }
+  .current__celsius {
+    font-size: 50px;
+  }
+  .current__weather__picture {
+    content: url("./dist/icons/solid-black/png/128x128/cloudy.png");
+  }
+  .current__status__string {
+    font-size: 20px;
+    margin-top: -10px;
+  }
+  .city__name {
+    font-size: 25px;
   }
 
+  .today__name {
+    font-size: 20px;
+  }
+
+  .today__date {
+    font-size: 15px;
+  }
+
+  .today__wind {
+    font-size: 15px;
+  }
+  .rain {
+    font-size: 15px;
+  }
 }

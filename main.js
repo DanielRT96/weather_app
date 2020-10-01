@@ -30,7 +30,7 @@ async function callAPI(apiURL) {
 // On Open - Budapest
 const baseWeather = async (input) => {
   // API key
-  const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
+  //const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
 
   //APi call
   const data = await callAPI(weatherApi);
@@ -61,7 +61,7 @@ const baseWeather = async (input) => {
   let weatherDesc = data.list[0].weather[0].main;
   currentStatusStr.innerHTML = data.list[0].weather[0].description;
   clearElement(".current__weather__picture");
-  getIcon(cStatus, weatherDesc);
+  getIcon(cStatus, weatherDesc, "256x256");
 
   // Get next days from API
   let newDataArr = [...data.list];
@@ -104,7 +104,7 @@ const baseWeather = async (input) => {
         celArray[dayIndex].push(dataArray[i][2]);
       }
     }
-    celArray[dayIndex].push(Math.round(total / numberOfLoops));
+    celArray[dayIndex].splice(1, 0, Math.round(total / numberOfLoops));
   });
   console.log(celArray);
 
@@ -135,10 +135,10 @@ const baseWeather = async (input) => {
     weatherIconArr.push(itemN);
   });
   console.log(weatherIconArr);
-  // weatherIconArr.map((icon, index) => {
-  //   let iconElement = document.querySelector(`.celsius${index}`);
-  //   iconElement.innerHTML = getIcon(iconElement, icon);
-  // });
+  weatherIconArr.map((icon, index) => {
+    let iconElement = document.querySelector(`.img${index}`);
+    getIcon(iconElement, icon, "32x32");
+  });
 };
 
 const getTodayString = (todayNumber) => {
@@ -162,7 +162,7 @@ const celsiusCalc = (kelvin) => {
   return kToC;
 };
 
-const getIcon = (parent, weatherDescription) => {
+const getIcon = (parent, weatherDescription, size) => {
   let weatherText;
   switch (weatherDescription) {
     case "Clear":
@@ -189,7 +189,7 @@ const getIcon = (parent, weatherDescription) => {
 
   const weatherIcon = `
     <img
-        src="./dist/icons/solid-white/png/256x256/${weatherText}.png"
+        src="./dist/icons/solid-white/png/${size}/${weatherText}.png"
         alt="" class="current__weather__picture"
     />
   `;

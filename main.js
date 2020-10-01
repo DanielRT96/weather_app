@@ -30,7 +30,7 @@ async function callAPI(apiURL) {
 // On Open - Budapest
 const baseWeather = async (input) => {
   // API key
-  // const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
+  //const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
 
   //APi call
   const data = await callAPI(weatherApi);
@@ -106,6 +106,10 @@ const baseWeather = async (input) => {
     celArray[dayIndex].push(avg);
   });
 
+  celArray.map((element, index) => {
+    let celElement = document.querySelector(`.celsius${index}`);
+    celElement.innerHTML = element[1];
+  });
   console.log(celArray);
   console.log(dataArray);
 };

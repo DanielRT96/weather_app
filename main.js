@@ -90,23 +90,44 @@ const baseWeather = async (input) => {
   //Get average of celsius
   let celArray = filteredArr.map((el) => new Array(el));
 
-  filteredArr.map((el) => {
-    let total = 0;
+  // filteredArr.map((el) => {
+  //   let total = 0;
+  //   let dayIndex;
+  //   let numberOfLoops = 0;
+  //   for (let i = 0; i < dataArray.length; i++) {
+  //     if (el === dataArray[i][0]) {
+  //       dayIndex = celArray.findIndex((el) => {
+  //         if (el.includes(dataArray[i][0])) return el;
+  //       });
+  //       total += dataArray[i][1];
+  //       numberOfLoops++;
+  //       celArray[dayIndex].push(dataArray[i][2]);
+  //     }
+  //   }
+  //   celArray[dayIndex].splice(1, 0, Math.round(total / numberOfLoops));
+  // });
+
+  filteredArr.map(el => {
     let dayIndex;
+    let total = 0;
     let numberOfLoops = 0;
-    for (let i = 0; i < dataArray.length; i++) {
-      if (el === dataArray[i][0]) {
-        dayIndex = celArray.findIndex((el) => {
-          if (el.includes(dataArray[i][0])) return el;
+    dataArray.map(data => {
+      if(el === data[0]) {
+        dayIndex = celArray.findIndex(element => {
+          if(element.includes(data[0])) return element;
         });
-        total += dataArray[i][1];
+        total += data[1];
         numberOfLoops++;
-        celArray[dayIndex].push(dataArray[i][2]);
+        celArray[dayIndex].push(data[2]);
       }
-    }
+    })
     celArray[dayIndex].splice(1, 0, Math.round(total / numberOfLoops));
-  });
+  })
+
+
+  console.log(filteredArr);  
   console.log(celArray);
+  console.log(dataArray);
 
   // Load celsius into UI
   celArray.map((element, index) => {
@@ -134,7 +155,7 @@ const baseWeather = async (input) => {
     }
     weatherIconArr.push(itemN);
   });
-  console.log(weatherIconArr);
+
   weatherIconArr.map((icon, index) => {
     let iconElement = document.querySelector(`.img${index}`);
     clearElement(`.weather__small__icon${index}`);

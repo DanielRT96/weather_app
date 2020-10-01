@@ -30,7 +30,7 @@ async function callAPI(apiURL) {
 // On Open - Budapest
 const baseWeather = async (input) => {
   // API key
-  //const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
+  const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
 
   //APi call
   const data = await callAPI(weatherApi);
@@ -137,7 +137,8 @@ const baseWeather = async (input) => {
   console.log(weatherIconArr);
   weatherIconArr.map((icon, index) => {
     let iconElement = document.querySelector(`.img${index}`);
-    getIcon(iconElement, icon, "32x32");
+    clearElement(`.weather__small__icon${index}`);
+    getIcon(iconElement, icon, "32x32", index);
   });
 };
 
@@ -162,7 +163,7 @@ const celsiusCalc = (kelvin) => {
   return kToC;
 };
 
-const getIcon = (parent, weatherDescription, size) => {
+const getIcon = (parent, weatherDescription, size, i) => {
   let weatherText;
   switch (weatherDescription) {
     case "Clear":
@@ -187,12 +188,25 @@ const getIcon = (parent, weatherDescription, size) => {
       weatherText = "clear";
   }
 
-  const weatherIcon = `
+  let weatherIcon; 
+  if(size === "256x256"){
+    weatherIcon =
+  
+  `
     <img
         src="./dist/icons/solid-white/png/${size}/${weatherText}.png"
         alt="" class="current__weather__picture"
     />
-  `;
+  `
+  } else {
+    weatherIcon =
+    `
+      <img
+          src="./dist/icons/solid-white/png/${size}/${weatherText}.png"
+          alt="" class="weather__small__icon${i}"
+      />
+    `
+    }
   parent.insertAdjacentHTML("afterbegin", weatherIcon);
 };
 

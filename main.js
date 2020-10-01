@@ -30,7 +30,7 @@ async function callAPI(apiURL) {
 // On Open - Budapest
 const baseWeather = async (input) => {
   // API key
-  //const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
+  const weatherApi = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=2e0f37fe8a0d411129e27f36b2a7a02f`;
 
   //APi call
   const data = await callAPI(weatherApi);
@@ -71,7 +71,9 @@ const baseWeather = async (input) => {
 
     let temperatures = element.main.temp;
     let celsiuses = celsiusCalc(temperatures);
-    return new Array(dateName, celsiuses);
+
+    let weatherString = element.weather[0].main;
+    return new Array(dateName, celsiuses, weatherString);
   });
 
   //Load days into UI
@@ -85,7 +87,7 @@ const baseWeather = async (input) => {
     dayElement.innerHTML = day.substring(0, 3).toUpperCase();
   });
 
-  //Load celsius into UI
+  //Get average of celsius
   let celArray = filteredArr.map((el) => new Array(el));
 
   filteredArr.map((el) => {
@@ -99,16 +101,44 @@ const baseWeather = async (input) => {
         });
         total += dataArray[i][1];
         numberOfLoops++;
+        celArray[dayIndex].push(dataArray[i][2]);
       }
     }
     celArray[dayIndex].push(Math.round(total / numberOfLoops));
   });
+  console.log(celArray);
 
+  // Load celsius into UI
   celArray.map((element, index) => {
     let celElement = document.querySelector(`.celsius${index}`);
     celElement.innerHTML = `${element[1]}°`;
   });
-  console.log(dataArray);
+
+  // Most frequent value
+  let weatherIconArr = [];
+  celArray.map((el) => {
+    let mf = 1;
+    let m = 0;
+    let itemN;
+    for (let i = 0; i < el.length; i++) {
+      for (let j = i; j < el.length; j++) {
+        if (el[i] == el[j]) {
+          m++;
+        }
+        if (mf < m) {
+          mf = m;
+          itemN = el[i];
+        }
+      }
+      m = 0;
+    }
+    weatherIconArr.push(itemN);
+  });
+  console.log(weatherIconArr);
+  // weatherIconArr.map((icon, index) => {
+  //   let iconElement = document.querySelector(`.celsius${index}`);
+  //   iconElement.innerHTML = getIcon(iconElement, icon);
+  // });
 };
 
 const getTodayString = (todayNumber) => {

@@ -124,11 +124,6 @@ const baseWeather = async (input) => {
     celArray[dayIndex].splice(1, 0, Math.round(total / numberOfLoops));
   })
 
-
-  console.log(filteredArr);  
-  console.log(celArray);
-  console.log(dataArray);
-
   // Load celsius into UI
   celArray.map((element, index) => {
     let celElement = document.querySelector(`.celsius${index}`);
@@ -212,7 +207,6 @@ const getIcon = (parent, weatherDescription, size, i) => {
   let weatherIcon; 
   if(size === "256x256"){
     weatherIcon =
-  
   `
     <img
         src="./dist/icons/solid-white/png/${size}/${weatherText}.png"

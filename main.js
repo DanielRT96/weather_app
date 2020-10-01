@@ -89,11 +89,9 @@ const baseWeather = async (input) => {
   let celArray = filteredArr.map((el) => new Array(el));
 
   filteredArr.map((el) => {
-    let total;
+    let total = 0;
     let dayIndex;
     let numberOfLoops = 0;
-    let avg = total / numberOfLoops;
-
     for (let i = 0; i < dataArray.length; i++) {
       if (el === dataArray[i][0]) {
         dayIndex = celArray.findIndex((el) => {
@@ -103,14 +101,13 @@ const baseWeather = async (input) => {
         numberOfLoops++;
       }
     }
-    celArray[dayIndex].push(avg);
+    celArray[dayIndex].push(Math.round(total / numberOfLoops));
   });
 
   celArray.map((element, index) => {
     let celElement = document.querySelector(`.celsius${index}`);
-    celElement.innerHTML = element[1];
+    celElement.innerHTML = `${element[1]}°`;
   });
-  console.log(celArray);
   console.log(dataArray);
 };
 
@@ -173,10 +170,6 @@ const clearElement = (classOfEl) => {
   const element = document.querySelector(classOfEl);
   if (element) element.parentElement.removeChild(element);
 };
-
-// fetch("./data.json")
-//   .then((response) => response.json())
-//   .then((data) => console.log(data));
 
 inputBox.addEventListener("keypress", (e) => {
   let input;
